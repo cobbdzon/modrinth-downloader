@@ -1,0 +1,209 @@
+modlist_name: "hawktuah"
+
+client:
+  # performance
+  - sodium
+  - sodium-extra
+  - entityculling
+  - indium
+  - bbrb
+  - ebe
+  - dynamic-fps
+  - fast-items
+  - particle-core
+  - collision-fix
+  - cull-leaves
+  - gputape
+  - fix-horizontal-camera-lag
+
+  # gameplay
+  - travelers-titles
+  - seasonhud-fabric
+
+  # utils
+  # - mod-sets
+  - item-highlighter
+  - emoji-type
+  - compact-chat
+  - modmenu
+  - better-ping-display-fabric
+  - simple-hud-enhanced
+  - accurate-block-placement-reborn
+  - chat-heads
+  - mc122477fix-re-updated
+  - better-mount-hud
+  - zoomify
+  - cubes-without-borders
+  - seamless-loading-screen
+  - rrls
+  - dynamic-fps
+  - fast-ip-ping
+  - commandkeys
+
+  # sound
+  - sound-physics-remastered
+  - presence-footsteps
+  - ambientsounds
+  # - sound
+  - immersivethunder
+
+  # graphics
+  - bedrockify
+  - iris
+  - visuality
+  - make_bubbles_pop
+  - tiny-item-animations
+  - shield-banner-fix
+  - modelfix
+  - eating-animation
+  - first-person-model
+  - chunks-fade-in
+  - not-enough-animations
+  - first-person-model
+  - better-clouds
+  - explosive-enhancement
+  - 3dskinlayers
+  - lambdynamiclights
+  - enhancedvisuals
+  - smooth-skies
+  - cameraoverhaul
+  - immersive-winds
+  # - fog
+  # - particle-rain
+
+  # optifine compat
+  - continuity
+  - entity-model-features
+  - entitytexturefeatures
+  # - optigui
+  # - animatica
+  # - cit-resewn
+  - fabricskyboxes
+  - fabricskyboxes-interop
+  # - polytone
+
+shared:
+  # worldgen
+  - sparsestructures
+  - wwoo
+  - expanded-ecosphere
+  - kogtyv-tav
+
+  # lib
+  - azurelib
+  - geckolib
+  - geckoanimfix
+  - necronomicon
+
+  # performance
+  - lithium
+  - packet-fixer
+  - krypton
+  - autotag
+  - memoryleakfix
+  - faster-random
+  - c2me-fabric
+  - ferrite-core
+  - lazydfu
+  - deuf-refabricated
+  - mobtimizations
+
+  # gameplay
+  - inmis
+  - inmisaddon
+  - true-darkness-refabricated
+  - from-another-world
+  - tough-as-nails
+  - farmers-delight-refabricated
+  - crate-delight
+  - medievalweapons
+  - small-ships
+  - niftycarts
+  - nox-renoxed
+  - zombie-awareness
+  - mifb
+  - nyfs-spiders
+  - mobs-attempt-parkour
+  - i-see-what-you-did-there
+  - pigs-have-litters
+  - wither-skeleton-propagation
+  - enhanced-cats
+  - doggo-mod-overhauled
+  - horsebuff
+  - nosleeping
+  - xaeros-world-map
+  - appleskin
+  - time-wind
+  - realistic-cobwebs
+  - on-soul-fire
+  - fabric-seasons
+  - fabric-seasons-delight-compat
+  - danger-close
+  - fire-arrows-ignite-fire
+  - realistic-fire-spread
+  - crawl
+  - better-combat
+  - trinkets
+  - starter-kit
+  - radiant-gear
+  - aquifer
+  - crops-love-rain
+  - unloaded-activity
+  - trample-no-more
+  - banner-flags
+  - multiplayer-server-pause
+  - this-boat-is-mine
+  - better-boat-movement
+  - kaffees_dual_ride
+  - universal-graves
+  - simple-voice-radio
+  - morewaterlogging
+  - naturalist
+  - hybrid-aquatic
+  - stat-tinkerer
+  - snow-real-magic
+  - passable-leaves
+  # - enhanced-celestials
+  - immersive-weathering
+  - treechop
+  - macaws-fences-and-walls
+  - purecoppertools
+  - dramatic-doors
+  - vertical-slabs-compat
+  - zombie-apocalypse-drops
+  - guard-villagers-(fabricquilt)
+  - warrior-rage
+
+  # utils
+  - jei
+  - inventory-management
+  - polymorph
+  - automodpack
+  - item-obliterator
+
+  -  # social
+  - no-player-nametags
+  - simple-voice-chat
+  - fabrictailor
+  - what-are-they-up-to
+  - emotecraft
+
+server:
+  - noisium
+  - recipecooldown
+  - mc-249136-fix
+  - achievements-optimizer
+  - lmd
+  - styled-nicknames
+  - server-controls
+  - tick-stasis
+  - player-roles
+  - fastback
+  - better-fabric-console
+  - discord-statusbot
+  - chunky
+  - spark
+  - leaves-be-gone
+  - maintenancemode
+  # - discord-mc-chat
+  - immersive-snow
