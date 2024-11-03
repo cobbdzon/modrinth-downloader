@@ -21,3 +21,7 @@ cd ./path/to/modrinth-downloader
 chmod +x ./download.sh # to give shell script execute permissions
 ./download.sh name-of-modlist # without the .yaml file extension
 ```
+
+## Plans
+- Adding support for Windows (help is welcome from any Windows user)
+- Turn project into a pip package.
