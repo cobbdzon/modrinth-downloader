@@ -10,7 +10,7 @@ Note that this utility was made for **Linux**, specifically **Debian Testing (13
 ### Writing Modlists
 See `examples` folder for a full example
 ```yaml
-modlist_name: "test modlist"
+modlist_name: "test-modlist" # no spaces
 
 client:
 - sodium@mc1.20.1-0.5.11
