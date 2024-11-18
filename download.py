@@ -12,7 +12,7 @@ from termcolor import colored
 CONFIG = yaml.safe_load(open("config.yaml", "r"))
 
 MODLIST = yaml.safe_load(open(sys.argv[1], "r"))
-VERSION = CONFIG["minecraft_version"]
+GAME_VERSION = CONFIG["minecraft_version"]
 LOADER = CONFIG["mod_loader"]
 RETRY_FETCH_LIMIT = CONFIG["retry_fetch_limit"]
 FETCH_GROUP_N = CONFIG["fetch_group_n"]
@@ -30,7 +30,7 @@ retry_fetch_count = 0
 failed_fetch_count = 0
 no_match_count = 0
 
-print(colored("downloading for:", "yellow"), colored(LOADER + " " + VERSION, "cyan"))
+print(colored("downloading for:", "yellow"), colored(LOADER + " " + GAME_VERSION, "cyan"))
 print(colored("fetching mods in groups of", "yellow"), colored(str(FETCH_GROUP_N) + "s", "cyan"))
 print(colored("amount of download threads:", "yellow"), colored(str(DOWNLOAD_THREADS), "cyan"))
 
@@ -38,11 +38,11 @@ def grouper(iterable, n, fillvalue=None):
     args = [iter(iterable)] * n
     return zip_longest(*args, fillvalue=fillvalue)
 
-def getMatchingVersionIndex(mod_version_list):
+def getMatchingVersionIndex(mod_version_list, mod_requested_version):
     # match the version and loader
     index = 0
     for version_info in mod_version_list:
-        if VERSION in version_info["game_versions"] and LOADER in version_info["loaders"]:
+        if GAME_VERSION in version_info["game_versions"] and LOADER in version_info["loaders"] and (mod_requested_version == None or mod_requested_version == version_info["version_number"]):
             return index
         else:
             index += 1
@@ -61,21 +61,26 @@ def downloadSlugs(project_slugs, out_subdir, scope):
     failed_slugs = []
 
     # get project info and versions
-    def getProjectData(proj_idslug, dependent_of):
-        info_response = requests.get("https://api.modrinth.com/v2/project/" + proj_idslug)
-        version_response = requests.get("https://api.modrinth.com/v2/project/" + proj_idslug + "/version")
+    def getProjectData(mod_request, dependent_of):
 
-        proj_name = proj_idslug
+        _mr = mod_request.split("@")
+        mod_id = _mr[0]
+        mod_requested_version = _mr[1] if len(_mr) > 1 else None
+
+        info_response = requests.get("https://api.modrinth.com/v2/project/" + mod_id)
+        version_response = requests.get("https://api.modrinth.com/v2/project/" + mod_id + "/version")
+
+        mod_name = mod_id
         if dependent_of != None:
-            proj_name = dependent_of + ": " + proj_name
+            mod_name = dependent_of + ": " + mod_name
 
         if info_response.ok and version_response.ok:
             mod_info = info_response.json()
             mod_versions = version_response.json()
 
             # match version and loader
-            if VERSION in mod_info["game_versions"] and LOADER in mod_info["loaders"]:
-                matched_version = mod_versions[getMatchingVersionIndex(mod_versions)]
+            if GAME_VERSION in mod_info["game_versions"] and LOADER in mod_info["loaders"]:
+                matched_version = mod_versions[getMatchingVersionIndex(mod_versions, mod_requested_version)]
                 mod_data = {
                     "info": mod_info,
                     "version": matched_version
@@ -91,22 +96,22 @@ def downloadSlugs(project_slugs, out_subdir, scope):
                         d_slug = d_info["project_id"]
 
                         if d_slug in known_slugs:
-                            proj_name = mod_info["slug"] + ": " + d_slug
-                            print(colored(scope, SCOPE_COLORS[scope]), colored(proj_name + " already fetched: " + mod_info["title"], "green"))
+                            mod_name = mod_info["slug"] + ": " + d_slug
+                            print(colored(scope, SCOPE_COLORS[scope]), colored(mod_name + " already fetched: " + mod_info["title"], "green"))
                         else:
                             known_slugs.append(d_slug)
-                            getProjectData(d_slug, proj_name)
+                            getProjectData(d_slug, mod_name)
 
-                print(colored(scope, SCOPE_COLORS[scope]), colored(proj_name + " fetched successfully: " + mod_info["title"], "green"))
+                print(colored(scope, SCOPE_COLORS[scope]), colored(mod_name + " fetched successfully: " + mod_info["title"], "green"))
                 return mod_data
             else:
-                print(colored(scope, SCOPE_COLORS[scope]), colored(proj_name + " matched neither selected version or loader", "red"))
+                print(colored(scope, SCOPE_COLORS[scope]), colored(mod_name + " matched neither selected version or loader", "red"))
 
                 global no_match_count
                 no_match_count += 1
         else:
-            failed_slugs.append(proj_idslug)
-            print(colored(scope, SCOPE_COLORS[scope]), colored(proj_name + " failed one of the requests to modrinth", "red"))
+            failed_slugs.append(mod_id)
+            print(colored(scope, SCOPE_COLORS[scope]), colored(mod_name + " failed one of the requests to modrinth", "red"))
             global failed_fetch_count
             failed_fetch_count += 1
 
@@ -205,6 +210,10 @@ def downloadModlist():
     createDirectory(modlist_dir)
 
     def process_scope(scope):
+        if not scope in MODLIST:
+            print(colored(scope + " scope not found, ignoring...", "yellow"))
+            return
+
         def _fn():
             scope_subdir = MODLIST["modlist_name"] + "/" + scope
             createDirectory(OUT_DIR_STR + "/" + scope_subdir)
