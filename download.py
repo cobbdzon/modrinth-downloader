@@ -12,8 +12,8 @@ from termcolor import colored
 CONFIG = yaml.safe_load(open("config.yaml", "r"))
 
 MODLIST = yaml.safe_load(open(sys.argv[1], "r"))
-GAME_VERSION = CONFIG["minecraft_version"]
-LOADER = CONFIG["mod_loader"]
+GAME_VERSION = MODLIST["minecraft_version"] or CONFIG["minecraft_version"]
+LOADER = MODLIST["mod_loader"] or CONFIG["mod_loader"]
 RETRY_FETCH_LIMIT = CONFIG["retry_fetch_limit"]
 FETCH_GROUP_N = CONFIG["fetch_group_n"]
 DOWNLOAD_THREADS = CONFIG["download_threads"]

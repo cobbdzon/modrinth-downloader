@@ -12,6 +12,10 @@ See `examples` folder for a full example
 ```yaml
 modlist_name: "test-modlist" # no spaces
 
+# if not declared, both of these will default to the config.yaml
+minecraft_version: "1.21"
+mod_loader: "fabric"
+
 client:
 - sodium@mc1.20.1-0.5.11
 
