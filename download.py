@@ -124,7 +124,7 @@ def downloadSlugs(project_slugs, out_subdir, scope):
                 for ps in group:
                     if ps != None:
                         getProjectData(ps, None)
-            
+
             t = threading.Thread(target=_processGroup)
             t.start()
             threads.append(t)
@@ -188,7 +188,7 @@ def downloadSlugs(project_slugs, out_subdir, scope):
             t.join()
 
     downloadModFiles()
-    
+
     # retry failed slugs
     global retry_fetch_count
     if len(failed_slugs) > 0 and retry_fetch_count < RETRY_FETCH_LIMIT:
@@ -226,7 +226,7 @@ def downloadModlist():
     process_scope("client")
     process_scope("shared")
     process_scope("server")
-    
+
     for t in threads:
         t.join()
 

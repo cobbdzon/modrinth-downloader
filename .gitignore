@@ -1,2 +1,3 @@
 out/*
-modlists/*
+modlists
+.venv
