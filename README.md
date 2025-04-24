@@ -6,10 +6,10 @@ Note that this utility was made for **Linux**, specifically **Debian Testing (13
 ## Usage
 
 ### Installation
-```
+```bash
 python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+source .venv/bin/activate # activate virtual environment
+pip install -r requirements.txt # installs required packages into virtual environment
 ```
 
 ### Writing Modlists
@@ -40,7 +40,8 @@ For this example, check out [sodium's versions page](https://modrinth.com/mod/so
 ### Using Python3
 
 ```bash
-cd ./path/to/modrinth-downloader
+cd /path/to/modrinth-downloader
+source .venv/bin/activate # activate virtual environment
 python3 ./download.py ./path/to/modlist.yaml
 ```
 
