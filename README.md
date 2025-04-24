@@ -1,7 +1,7 @@
 # Modrinth Mod Download
 
 A great utility for bulk downloading Modrinth mods using the Modrinth API. <br>
-Note that this utility was made for **Linux**, specifically **Debian Testing (13/Trixie) Linux**.
+Note that this utility was made for **Linux**, specifically ~~Debian Testing (13/Trixie) Linux~~ Arch Linux.
 
 ## Usage
 
@@ -62,4 +62,4 @@ chmod +x ./download.sh # to give shell script execute permissions
 
 - Adding support for Windows (help is welcome from any Windows user)
 - Turn project into a pip package.
-- Make it into a package-esque version management system. (Similar to apt in Debian Linux)
+- Make it into a package-esque version management system. (Similar to ~~apt in Debian Linux~~ pacman in Arch Linux)

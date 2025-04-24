@@ -9,6 +9,10 @@ from pathlib import Path
 from itertools import zip_longest
 from termcolor import colored
 
+# TODO: CHANGE API USAGE TO BE MORE EFFICIENT
+# TODO: MAKE PRINTS MORE CLEARER AND INFORMATIVE
+# TODO: ADD LOADING BARS TO DOWNLOADS
+
 CONFIG = yaml.safe_load(open("config.yaml", "r"))
 
 MODLIST = yaml.safe_load(open(sys.argv[1], "r"))
@@ -42,7 +46,11 @@ def getMatchingVersionIndex(mod_version_list, mod_requested_version):
     # match the version and loader
     index = 0
     for version_info in mod_version_list:
-        if GAME_VERSION in version_info["game_versions"] and LOADER in version_info["loaders"] and (mod_requested_version == None or mod_requested_version == version_info["version_number"]):
+        matchingGameVersion = GAME_VERSION in version_info["game_versions"]
+        matchingLoader = LOADER in version_info["loaders"]
+        matchingModVersion = (mod_requested_version == None or mod_requested_version == version_info["version_number"])
+
+        if matchingGameVersion and matchingLoader and matchingModVersion:
             return index
         else:
             index += 1
@@ -143,6 +151,8 @@ def downloadSlugs(project_slugs, out_subdir, scope):
     def getDownloadData(mod_data):
         mod_info = mod_data["info"]
         mod_version = mod_data["version"]
+        file_name = None
+        file_url = None
 
         version_files = mod_version["files"]
         if len(version_files) > 1:
@@ -154,7 +164,8 @@ def downloadSlugs(project_slugs, out_subdir, scope):
             file_name = version_files[0]["filename"]
             file_url = version_files[0]["url"]
 
-        mods_download_registry.append([file_name, file_url])
+        if file_name and file_url:
+            mods_download_registry.append([file_name, file_url])
 
     for ps in success_slugs:
         getDownloadData(mods_data[ps])
